@@ -27,7 +27,7 @@ Caught the night before this beta shipped: an adversarial reviewer that green-li
 
 That's it — the bundled MCP server starts automatically when the plugin is enabled (approve it when Claude Code asks).
 
-**Claude Desktop (macOS/Windows):** download `edit-timeline-mcp-<version>.mcpb` from the [latest release](../../releases/latest) and open it — one-click install. Verify the download against the `.sha256` sidecar if you like.
+**Claude Desktop (macOS/Windows):** download `edit-timeline-mcp-<version>.mcpb` from the [latest release](../../releases/latest), then in the Claude Desktop app go to **Settings → Extensions → Install extension** and pick the file (or drag the file into that window — double-clicking the file only works when your Claude Desktop version has registered the `.mcpb` association). Verify the download against the `.sha256` sidecar if you like.
 
 **Any other MCP client:** extract the `.mcpb` (it's a zip) and point your MCP config at the bundled server (Node 20+):
 

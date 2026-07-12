@@ -1,7 +1,5 @@
 # edit-timeline Beta License
 
-> **⚠️ ATTORNEY REVIEW REQUIRED BEFORE PUBLIC LAUNCH.** This license was drafted with AI assistance and has not been reviewed by a lawyer. It is not legal advice. Have a licensed attorney review it (and the conversion-time commercial terms) before distributing edit-timeline publicly.
-
 **Licensor:** Smack Tax LLC ("Licensor")
 **Software:** edit-timeline — a governance server for AI coding agents, including all bundled binaries, plugins, scripts, and documentation (the "Software")
 **Version of these terms:** Beta 1 (2026-07-11)

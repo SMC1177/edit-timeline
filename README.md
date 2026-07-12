@@ -43,6 +43,14 @@ That's it — the bundled MCP server starts automatically when the plugin is ena
 }
 ```
 
+## Setup: model key (for the AI-powered features)
+
+edit-timeline's plan / verify / commit / audit-trail spine works out of the box. The **model-powered** features — subagent-driven implementation, adversarial review, and grounded phone answers — call a model backend (DeepSeek by default), so set your own key once:
+
+- Put `DEEPSEEK_API_KEY=sk-...` in your environment, or in `~/.aider.env`.
+
+It's **your** key — nothing routes through us. Without it, those specific features return "DeepSeek API key not found" and everything else keeps working.
+
 ## Status
 
 Public beta. Free during the beta under the [beta license](./LICENSE-BETA.md) — plain English: use it freely (including at work), don't redistribute or resell it, don't reverse engineer it. Commercial terms may follow after the beta; nothing you do in the beta obligates you to them.

@@ -18,14 +18,21 @@ Caught the night before this beta shipped: an adversarial reviewer that green-li
 
 ## Install (free beta)
 
-**Claude Code (PowerShell / VS Code / terminal) — the two-command way:**
+**Claude Code (PowerShell / VS Code / terminal).** Run these as **two separate commands** — enter the first, let it finish, then enter the second (don't paste both at once):
+
+Step 1 — add the marketplace:
 
 ```
 /plugin marketplace add SMC1177/edit-timeline
+```
+
+Step 2 — install the plugin:
+
+```
 /plugin install edit-timeline@edit-timeline
 ```
 
-That's it — the bundled MCP server starts automatically when the plugin is enabled (approve it when Claude Code asks).
+The bundled MCP server starts automatically once the plugin is enabled (approve it when Claude Code asks). If you run `/plugin marketplace add` with no argument and it prompts "Enter marketplace source," type just `SMC1177/edit-timeline` there — nothing else.
 
 **Claude Desktop (macOS/Windows):** download `edit-timeline-mcp-<version>.mcpb` from the [latest release](../../releases/latest), then in the Claude Desktop app go to **Settings → Extensions → Install extension** and pick the file (or drag the file into that window — double-clicking the file only works when your Claude Desktop version has registered the `.mcpb` association). Verify the download against the `.sha256` sidecar if you like.
 

@@ -1,0 +1,22 @@
+{
+  "name": "edit-timeline",
+  "owner": {
+    "name": "Smack Tax LLC",
+    "url": "https://github.com/SMC1177"
+  },
+  "metadata": {
+    "description": "Governance for AI coding agents: enforced plans, server-verified edits, adversarial review, audit trail.",
+    "version": "0.4.0"
+  },
+  "plugins": [
+    {
+      "name": "edit-timeline",
+      "source": "./plugins/edit-timeline",
+      "description": "Governance server for AI coding agents - enforced plans, server-verified edits, adversarial review, and an append-only audit trail. Free beta under LICENSE-BETA.md (proprietary; no redistribution).",
+      "version": "0.4.0",
+      "author": { "name": "Smack Tax LLC" },
+      "license": "SEE LICENSE IN LICENSE-BETA.md",
+      "keywords": ["governance", "verification", "adversarial-review", "audit", "mcp"]
+    }
+  ]
+}

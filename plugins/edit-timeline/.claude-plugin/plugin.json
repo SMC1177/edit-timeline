@@ -1,0 +1,14 @@
+{
+  "name": "edit-timeline",
+  "description": "Governance server for AI coding agents - enforced plans, server-verified edits, adversarial review, and an append-only audit trail. Free beta (proprietary license included).",
+  "version": "0.4.0",
+  "author": { "name": "Smack Tax LLC" },
+  "license": "SEE LICENSE IN LICENSE-BETA.md",
+  "homepage": "https://github.com/SMC1177/edit-timeline",
+  "mcpServers": {
+    "edit-timeline": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/server/index.mjs", "serve"]
+    }
+  }
+}

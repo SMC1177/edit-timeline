@@ -18,9 +18,18 @@ Caught the night before this beta shipped: an adversarial reviewer that green-li
 
 ## Install (free beta)
 
-**Claude Desktop (macOS/Windows):** download `edit-timeline-mcp-<version>.mcpb` from the [latest release](../../releases/latest) and open it — Claude walks you through one-click install. Verify the download against the `.sha256` sidecar if you like.
+**Claude Code (PowerShell / VS Code / terminal) — the two-command way:**
 
-**Claude Code / other MCP clients:** download and extract the `.mcpb` (it's a zip), then point your MCP config at the bundled server:
+```
+/plugin marketplace add SMC1177/edit-timeline
+/plugin install edit-timeline@edit-timeline
+```
+
+That's it — the bundled MCP server starts automatically when the plugin is enabled (approve it when Claude Code asks).
+
+**Claude Desktop (macOS/Windows):** download `edit-timeline-mcp-<version>.mcpb` from the [latest release](../../releases/latest) and open it — one-click install. Verify the download against the `.sha256` sidecar if you like.
+
+**Any other MCP client:** extract the `.mcpb` (it's a zip) and point your MCP config at the bundled server (Node 20+):
 
 ```jsonc
 // .mcp.json
@@ -33,8 +42,6 @@ Caught the night before this beta shipped: an adversarial reviewer that green-li
   }
 }
 ```
-
-Requires Node 20+ on PATH for non-Desktop installs (Claude Desktop ships its own).
 
 ## Status
 

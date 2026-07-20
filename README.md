@@ -16,6 +16,13 @@ Agents ship code that *looks* right. edit-timeline exists for the gap between "l
 
 Caught the night before this beta shipped: an adversarial reviewer that green-lit a change it never saw — because the diff exceeded its embed cap. That finding is now a fixed bug and a regression gate. That's the loop, working on itself.
 
+## See it in action
+
+A 60-second true story from the ledger: an AI session got stuck mid-commit at 10pm, used the built-in help line to reach the builder, and the diagnosis, repair, and permanent fix all shipped the same night. [Read the full case study](CASE-STUDY.md).
+
+<!-- VIDEO: drag promo-final.mp4 into this line in the GitHub web editor to embed it natively, or replace with the YouTube link -->
+
+
 ## Install (free beta)
 
 **Claude Code (PowerShell / VS Code / terminal).** Run these as **two separate commands** — enter the first, let it finish, then enter the second (don't paste both at once):
@@ -64,7 +71,7 @@ Public beta. Free during the beta under the [beta license](./LICENSE-BETA.md) �
 
 ## Feedback — the whole point
 
-Found a scenario it handles badly? **That's the product working as intended — please file it.** Open an [issue](../../issues) with the version (in the release filename) and what you expected vs. got. Bug reports here feed directly into the suggestion-box pipeline that drives every release; "fixed in vX.Y.Z" replies are how we say thanks.
+Found a scenario it handles badly? **That's exactly what this beta exists to find — please file it.** Open an [issue](../../issues) with the version (in the release filename) and what you expected vs. got. Bug reports here feed directly into the suggestion-box pipeline that drives every release; "fixed in vX.Y.Z" replies are how we say thanks.
 
 ## Trademarks
 

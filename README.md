@@ -41,7 +41,9 @@ Step 2 — install the plugin:
 
 The bundled MCP server starts automatically once the plugin is enabled (approve it when Claude Code asks). If you run `/plugin marketplace add` with no argument and it prompts "Enter marketplace source," type just `SMC1177/edit-timeline` there — nothing else.
 
-**Claude Desktop (macOS/Windows):** download `edit-timeline-mcp-<version>.mcpb` from the [latest release](../../releases/latest), then in the Claude Desktop app go to **Settings → Extensions → Install extension** and pick the file (or drag the file into that window — double-clicking the file only works when your Claude Desktop version has registered the `.mcpb` association). Verify the download against the `.sha256` sidecar if you like.
+**Claude Desktop (macOS/Windows):** download `edit-timeline-mcp-<version>.mcpb` from the [latest release](../../releases/latest), then **open Claude Desktop and drag the file into Settings → Extensions** (or use the **Install extension** button there and pick the file). That is the whole install.
+
+> **Don’t double-click the .mcpb.** On a fresh Windows machine the file often isn’t associated with Claude yet, so Windows asks which app to open it with — and Claude’s program folder is hidden by default, so hunting for `claude.exe` is a dead end. You never need to find the exe: dragging the file into the Extensions window installs it directly. Verify the download against the `.sha256` sidecar if you like.
 
 **Any other MCP client:** extract the `.mcpb` (it's a zip) and point your MCP config at the bundled server (Node 20+):
 

@@ -1,3 +1,5 @@
 # never publish runtime data the server writes
 /data/
 plugins/*/data/
+# local tooling state (test markers etc.) - never publish
+.claude/

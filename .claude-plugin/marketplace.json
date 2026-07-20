@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Governance for AI coding agents: enforced plans, server-verified edits, adversarial review, audit trail.",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "plugins": [
     {
       "name": "edit-timeline",
       "source": "./plugins/edit-timeline",
       "description": "Governance server for AI coding agents - enforced plans, server-verified edits, adversarial review, and an append-only audit trail. Free beta under LICENSE-BETA.md (proprietary; no redistribution).",
-      "version": "0.7.0",
+      "version": "0.8.0",
       "author": {
         "name": "Smack Tax LLC"
       },

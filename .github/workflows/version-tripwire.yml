@@ -1,0 +1,71 @@
+name: version tripwire
+
+# Customer report ph-rea96b52f: a release can exist in three separately-updatable
+# states — git tag pushed, manifest versions bumped, bundle synced — and they
+# drifted. A tag was cut without the manifest bump, which made that release
+# invisible to Claude Code's update check, so installed users could never
+# receive it. Nothing failed loudly; the release just silently did not reach
+# anyone.
+#
+# This job converts that silent breakage into a red X. It fails a tag push
+# whenever the two manifests and the tag do not all agree.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  versions-agree:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: tag, plugin.json and marketplace.json must all agree
+        run: |
+          set -euo pipefail
+
+          TAG="${GITHUB_REF_NAME#v}"
+          PLUGIN_FILE="plugins/edit-timeline/.claude-plugin/plugin.json"
+          MARKET_FILE=".claude-plugin/marketplace.json"
+
+          for f in "$PLUGIN_FILE" "$MARKET_FILE"; do
+            if [ ! -f "$f" ]; then
+              echo "::error::$f is missing — cannot verify the release version."
+              exit 1
+            fi
+          done
+
+          PLUGIN=$(jq -r '.version // empty' "$PLUGIN_FILE")
+          MARKET=$(jq -r '(.plugins[] | select(.name=="edit-timeline") | .version) // empty' "$MARKET_FILE")
+
+          echo "tag:             $TAG"
+          echo "plugin.json:     ${PLUGIN:-<unset>}"
+          echo "marketplace.json:${MARKET:-<unset>}"
+
+          fail=0
+
+          if [ -z "$PLUGIN" ]; then
+            echo "::error file=$PLUGIN_FILE::version is missing or empty."
+            fail=1
+          fi
+          if [ -z "$MARKET" ]; then
+            echo "::error file=$MARKET_FILE::no version for the edit-timeline plugin entry."
+            fail=1
+          fi
+
+          if [ -n "$PLUGIN" ] && [ "$PLUGIN" != "$TAG" ]; then
+            echo "::error file=$PLUGIN_FILE::declares $PLUGIN but the tag is v$TAG. Claude Code resolves the version from plugin.json and skips the update when the string is unchanged, so installed users would never receive this release."
+            fail=1
+          fi
+          if [ -n "$MARKET" ] && [ "$MARKET" != "$TAG" ]; then
+            echo "::error file=$MARKET_FILE::declares $MARKET but the tag is v$TAG. Declaring the version in two places lets a stale one silently mask the other."
+            fail=1
+          fi
+
+          if [ "$fail" -ne 0 ]; then
+            echo "Fix: bump both manifests to $TAG, then re-tag. Prefer cutting releases with one command that bumps, commits and tags together rather than tagging by hand."
+            exit 1
+          fi
+
+          echo "All three agree at $TAG."

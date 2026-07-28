@@ -38,10 +38,14 @@ jobs:
 
           PLUGIN=$(jq -r '.version // empty' "$PLUGIN_FILE")
           MARKET=$(jq -r '(.plugins[] | select(.name=="edit-timeline") | .version) // empty' "$MARKET_FILE")
+          # marketplace.json records the version TWICE. Reading only the plugin
+          # entry let a half-finished bump through with the file inconsistent.
+          MARKET_META=$(jq -r '.metadata.version // empty' "$MARKET_FILE")
 
           echo "tag:             $TAG"
           echo "plugin.json:     ${PLUGIN:-<unset>}"
           echo "marketplace.json:${MARKET:-<unset>}"
+          echo "  .metadata.version:${MARKET_META:-<unset>}"
 
           fail=0
 
@@ -51,6 +55,18 @@ jobs:
           fi
           if [ -z "$MARKET" ]; then
             echo "::error file=$MARKET_FILE::no version for the edit-timeline plugin entry."
+            fail=1
+          fi
+          if [ -z "$MARKET_META" ]; then
+            echo "::error file=$MARKET_FILE::metadata.version is missing or empty — this file records the version twice and both must be set."
+            fail=1
+          fi
+          if [ -n "$MARKET_META" ] && [ "$MARKET_META" != "$TAG" ]; then
+            echo "::error file=$MARKET_FILE::metadata.version declares $MARKET_META but the tag is v$TAG."
+            fail=1
+          fi
+          if [ -n "$MARKET" ] && [ -n "$MARKET_META" ] && [ "$MARKET" != "$MARKET_META" ]; then
+            echo "::error file=$MARKET_FILE::the two recorded versions disagree — plugin entry $MARKET vs metadata.version $MARKET_META. A bump stopped halfway."
             fail=1
           fi
 

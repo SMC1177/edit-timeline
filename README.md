@@ -53,11 +53,33 @@ The bundled MCP server starts automatically once the plugin is enabled (approve 
   "mcpServers": {
     "edit-timeline": {
       "command": "node",
-      "args": ["<path-to-extracted>/server/index.mjs", "serve"]
+      "args": ["<path-to-extracted>/server/index.mjs", "serve", "--http", "39450"]
     }
   }
 }
 ```
+
+## After you install
+
+**Check it's running.** Ask your agent to call the `ping` tool, or open:
+
+```
+http://127.0.0.1:39450/health
+```
+
+You should get JSON with a `version` and a `git_sha`. If the connection is refused, the server started without `--http` — see the config above.
+
+**Open the console.**
+
+```
+http://127.0.0.1:39450/ui
+```
+
+This is the human side of edit-timeline: live sessions, the plan each agent is working against, every snippet and whether it verified, and the diff the server actually accepted. It binds to loopback, so it's reachable from your machine only.
+
+**Your first session.** You don't drive edit-timeline directly — your agent does. Ask it to do a piece of work through edit-timeline and it will open a session, file a plan, and dispatch. Watch the console while it works: the point is that you can see the plan before any edit lands, and see which edits passed the verify commands they declared.
+
+**Where your work is kept.** Sessions, plans, diffs, and the audit trail are written under the server's install directory on your own disk. Removing the extension does not delete that history.
 
 ## Setup: model key (for the AI-powered features)
 

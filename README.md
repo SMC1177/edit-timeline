@@ -61,6 +61,14 @@ The bundled MCP server starts automatically once the plugin is enabled (approve 
 
 ## After you install
 
+**Sign in with your edit-timeline account.** Every install requires a Google account to activate (accounts are enforced). Open:
+
+```
+http://127.0.0.1:39450/
+```
+
+The onboarding screen walks you through it: click **Sign in with Google**, approve the popup, and the server saves your account key automatically. If you're already signed in, the dashboard loads immediately. Your account is tied to your Google identity, so the same account works across machines (each machine keeps its own local data).
+
 **Check it's running.** Ask your agent to call the `ping` tool, or open:
 
 ```

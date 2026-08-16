@@ -61,13 +61,13 @@ The bundled MCP server starts automatically once the plugin is enabled (approve 
 
 ## After you install
 
-**Sign in with your edit-timeline account.** Every install requires a Google account to activate (accounts are enforced). Open:
+**First run: smax walks you through setup.** Every install requires a Google account to activate (accounts are enforced). Open the seat console:
 
 ```
-http://127.0.0.1:39450/
+http://127.0.0.1:39450/seat
 ```
 
-The onboarding screen walks you through it: click **Sign in with Google**, approve the popup, and the server saves your account key automatically. If you're already signed in, the dashboard loads immediately. Your account is tied to your Google identity, so the same account works across machines (each machine keeps its own local data).
+Smax (your orchestrator advisor) greets you with a guided conversation and walks you through the setup one step at a time — **Sign in with Google**, your DeepSeek API key, adopting a project directory, importing history, and semantic memory. Tap the reply buttons under his messages to answer, just like texting; each step saves for real as you go. When setup is complete the walkthrough clears from the chat, and a **📖 Tutorial** tab stays in the left sidebar so you can replay it any time. You can also paste an account key from another machine instead of signing in — either way the key is saved locally and your account works across machines (each machine keeps its own data).
 
 **Check it's running.** Ask your agent to call the `ping` tool, or open:
 
@@ -83,7 +83,7 @@ You should get JSON with a `version` and a `git_sha`. If the connection is refus
 http://127.0.0.1:39450/ui
 ```
 
-This is the human side of edit-timeline: live sessions, the plan each agent is working against, every snippet and whether it verified, and the diff the server actually accepted. It binds to loopback, so it's reachable from your machine only.
+This is the human side of edit-timeline: live sessions, the plan each agent is working against, every snippet and whether it verified, and the diff the server actually accepted. While setup is still pending, the dashboard sends you to the seat console so smax can walk you through it. It binds to loopback, so it's reachable from your machine only.
 
 **Your first session.** You don't drive edit-timeline directly — your agent does. Ask it to do a piece of work through edit-timeline and it will open a session, file a plan, and dispatch. Watch the console while it works: the point is that you can see the plan before any edit lands, and see which edits passed the verify commands they declared.
 

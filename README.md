@@ -10,6 +10,7 @@ Agents ship code that *looks* right. edit-timeline exists for the gap between "l
 
 - **Plans before edits.** Work is declared as snippets with intents and verification commands *before* any file changes. Off-plan diffs get flagged.
 - **Verified, not vibed.** Every applied change must pass its declared verify commands — the server runs them itself and refuses to let stale or missing test runs through.
+- **The server writes the edit, not a model.** Your agent reads exact bytes, names the lines to change, and the server writes them by line number and checksum. No model retypes your file, and if the lines moved since they were read, nothing is written.
 - **An adversary reviews the diff.** A fresh model is dispatched to hunt wrong-but-green defects — changes that pass the suite but are wrong, including tests that accommodate the bug.
 - **Everything is a ledger.** Sessions, edits, test runs, reviews, deploys — append-only, queryable, and there six months later when you ask "why is this file shaped like this?"
 - **A suggestion box your agents actually file into**, so the tool improves from real friction, not guesses.
@@ -85,17 +86,23 @@ http://127.0.0.1:39450/ui
 
 This is the human side of edit-timeline: live sessions, the plan each agent is working against, every snippet and whether it verified, and the diff the server actually accepted. While setup is still pending, the dashboard sends you to the seat console so smax can walk you through it. It binds to loopback, so it's reachable from your machine only.
 
-**Your first session.** You don't drive edit-timeline directly — your agent does. Ask it to do a piece of work through edit-timeline and it will open a session, file a plan, and dispatch. Watch the console while it works: the point is that you can see the plan before any edit lands, and see which edits passed the verify commands they declared.
+**Your first session.** You don't drive edit-timeline directly — your agent does. Ask it to do a piece of work through edit-timeline and it will open a session, file a plan, and dispatch. Watch the console while it works: the point is that you can see the plan before any edit lands, and see which edits passed the verify commands they declared. Before any edit lands, a load-bearing plan (two or more changes) has to say which slice of the work it is, what check decides that slice is done (a real test, probe or gate state, not a goal), and what the agent will do if it gets stuck. A plan that can't answer is refused before the session exists.
 
 **Where your work is kept.** Sessions, plans, diffs, and the audit trail are written under the server's install directory on your own disk. Removing the extension does not delete that history.
 
-## Setup: model key (for the AI-powered features)
+## Setup: model key (optional)
 
-edit-timeline's plan / verify / commit / audit-trail spine works out of the box. The **model-powered** features — subagent-driven implementation, adversarial review, and grounded phone answers — call a model backend (DeepSeek by default), so set your own key once:
+Without any key, edit-timeline still runs the governed loop: plans, exact-byte reads, server-written edits, the verify commands, commits and the audit trail. Adversarial review works too: the server hands your own agent a sealed review packet and checks what comes back. If no review is submitted and your session's policy doesn't require one, the commit still lands but is stamped as unreviewed.
 
-- Put `DEEPSEEK_API_KEY=sk-...` in your environment, or in `~/.aider.env`.
+A DeepSeek key adds the **model-powered** features: smax's advice beyond the guided setup, model-answered questions about your code, the built-in adversarial reviewer, and grounded phone answers. Set it once, any of these ways:
 
-It's **your** key — nothing routes through us. Without it, those specific features return "DeepSeek API key not found" and everything else keeps working.
+- in the setup chat at `http://127.0.0.1:39450/seat` (smax asks for it during setup),
+- in Claude Desktop: **Settings → Extensions → edit-timeline → DeepSeek API key**,
+- or as `DEEPSEEK_API_KEY` in the server's environment.
+
+It's **your** key — nothing routes through us.
+
+**Optional: a local model.** Scout questions can run on a local llama-server instead of DeepSeek. The default address is `http://127.0.0.1:39457/v1` (in Claude Desktop, the **Local LLM base URL** field). **Upgrading from 0.10.x:** the old default was port 39451, which is edit-timeline's own remote-access port. If you never set the URL yourself and your llama-server runs on 39451, move it to 39457; if you set the URL explicitly, nothing changes. The server warns at startup when the two collide.
 
 ## Status
 
